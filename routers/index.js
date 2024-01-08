@@ -1,4 +1,9 @@
 var express = require("express");
+const { sensorInsertValidator, validate } = require("./validator");
+const {
+  insertSensorController,
+  getSensorController,
+} = require("../controllers/sensor");
 var router = express.Router();
 
 router.use(function timeLog(req, res, next) {
@@ -16,5 +21,14 @@ router.get("/", function (req, res) {
     message: "Welcome to the API",
   });
 });
+
+router.post(
+  "/sensor",
+  sensorInsertValidator(),
+  validate,
+  insertSensorController
+);
+
+router.get("/sensor", validate, getSensorController);
 
 module.exports = router;

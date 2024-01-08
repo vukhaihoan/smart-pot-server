@@ -1,4 +1,10 @@
-const { param, query, validationResult, oneOf } = require("express-validator");
+const {
+  param,
+  query,
+  validationResult,
+  oneOf,
+  body,
+} = require("express-validator");
 const { isString, isInteger } = require("lodash");
 
 function isNumeric(str) {
@@ -19,6 +25,46 @@ const validate = (req, res, next) => {
   });
 };
 
+const sensorInsertValidator = (req, res, next) => {
+  return [
+    body("temperature")
+      .exists()
+      .withMessage("temperature is required")
+      .bail()
+      // .custom((value) => {
+      //   console.log("value temperature", typeof value);
+      //   if (!isNumeric(value)) {
+      //     throw new Error("temperature must be a number");
+      //   }
+      //   return true;
+      // }),
+      .isInt(),
+    body("humidity")
+      .exists()
+      .withMessage("humidity is required")
+      .bail()
+      // .custom((value) => {
+      //   if (!isNumeric(value)) {
+      //     throw new Error("humidity must be a number");
+      //   }
+      //   return true;
+      // }),
+      .isInt(),
+    body("light")
+      .exists()
+      .withMessage("light is required")
+      .bail()
+      // .custom((value) => {
+      //   if (!isNumeric(value)) {
+      //     throw new Error("light must be a number");
+      //   }
+      //   return true;
+      // }),
+      .isInt(),
+  ];
+};
+
 module.exports = {
   validate,
+  sensorInsertValidator,
 };
