@@ -31,7 +31,7 @@ exports.insertSensorController = async (req, res) => {
 };
 
 exports.getSensorController = async (req, res) => {
-  const result = await sensor.find();
+  const result = await sensor.find().sort({ timestamp: -1 });
   if (result) {
     res.status(200).json({
       message: "Get sensor data successfully",
