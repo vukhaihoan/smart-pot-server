@@ -7,7 +7,7 @@ const insertSensor = async (sensorData) => {
 };
 
 exports.insertSensorController = async (req, res) => {
-  const { temperature, humidity, light } = req.body;
+  const { temperature, humidity, light } = req.query;
   const currentTime = new Date();
   const sensorData = {
     temperature: temperature,

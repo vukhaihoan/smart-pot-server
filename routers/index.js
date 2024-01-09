@@ -1,9 +1,24 @@
 var express = require("express");
-const { sensorInsertValidator, validate } = require("./validator");
+const {
+  sensorInsertValidator,
+  validate,
+  pumpStatusValidator,
+  lightStatusValidator,
+  pumpActiveValidator,
+  lightActiveValidator,
+} = require("./validator");
 const {
   insertSensorController,
   getSensorController,
 } = require("../controllers/sensor");
+const {
+  getStateController,
+  updatePumpStatusController,
+  updateLightStatusController,
+  updatePumpActiveController,
+  updateLightActiveController,
+} = require("../controllers/state");
+
 var router = express.Router();
 
 router.use(function timeLog(req, res, next) {
@@ -30,5 +45,35 @@ router.post(
 );
 
 router.get("/sensor", validate, getSensorController);
+
+router.get("/state", validate, getStateController);
+
+router.post(
+  "/state/pump/status",
+  pumpStatusValidator(),
+  validate,
+  updatePumpStatusController
+);
+
+router.post(
+  "/state/light/status",
+  lightStatusValidator(),
+  validate,
+  updateLightStatusController
+);
+
+router.post(
+  "/state/pump/active",
+  pumpActiveValidator(),
+  validate,
+  updatePumpActiveController
+);
+
+router.post(
+  "/state/light/active",
+  lightActiveValidator(),
+  validate,
+  updateLightActiveController
+);
 
 module.exports = router;
