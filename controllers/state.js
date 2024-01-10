@@ -18,19 +18,23 @@ const updateLightStatus = async (status) => {
   return result;
 };
 
-const updatePumpActive = async (status) => {
+const updatePumpActive = async () => {
+  // toggle pump active
+  const currentState = await state.findOne();
   const result = await state.findOneAndUpdate(
     {},
-    { PumpActive: status },
+    { PumpActive: !currentState.PumpActive },
     { new: true }
   );
   return result;
 };
 
 const updateLightActive = async (status) => {
+  // toggle light active
+  const currentState = await state.findOne();
   const result = await state.findOneAndUpdate(
     {},
-    { LightActive: status },
+    { LightActive: !currentState.LightActive },
     { new: true }
   );
   return result;

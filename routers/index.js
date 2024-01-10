@@ -64,14 +64,14 @@ router.post(
 
 router.post(
   "/state/pump/active",
-  pumpActiveValidator(),
+  // pumpActiveValidator(),
   validate,
   updatePumpActiveController
 );
 
 router.post(
   "/state/light/active",
-  lightActiveValidator(),
+  // lightActiveValidator(),
   validate,
   updateLightActiveController
 );
