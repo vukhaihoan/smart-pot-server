@@ -76,6 +76,30 @@ exports.getStateController = async (req, res) => {
   }
 };
 
+exports.getPumpActiveController = async (req, res) => {
+  try {
+    const result = await getState();
+    res.status(200).send(result.PumpActive);
+  } catch (error) {
+    console.log("getPumpActiveController error", error);
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
+exports.getLightActiveController = async (req, res) => {
+  try {
+    const result = await getState();
+    res.status(200).send(result.LightActive);
+  } catch (error) {
+    console.log("getLightActiveController error", error);
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
 exports.updatePumpStatusController = async (req, res) => {
   const { status } = req.query;
   try {

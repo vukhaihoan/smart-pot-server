@@ -17,6 +17,8 @@ const {
   updateLightStatusController,
   updatePumpActiveController,
   updateLightActiveController,
+  getPumpActiveController,
+  getLightActiveController,
 } = require("../controllers/state");
 
 var router = express.Router();
@@ -61,6 +63,9 @@ router.post(
   validate,
   updateLightStatusController
 );
+
+router.get("/state/pump/active", validate, getPumpActiveController);
+router.get("/state/light/active", validate, getLightActiveController);
 
 router.post(
   "/state/pump/active",
